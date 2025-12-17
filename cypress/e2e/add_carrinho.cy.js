@@ -7,6 +7,7 @@ describe('Adicionar ao Carrinho', () => {
         cy.get('[data-test="login-button"]').click()
         //act
         cy.get('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
+        cy.screenshot('produto adicionado')
         //assert
         cy.get('[data-test="shopping-cart-badge"]')
             .should('be.visible')
@@ -15,5 +16,20 @@ describe('Adicionar ao Carrinho', () => {
         cy.contains('Sauce Labs Bolt T-Shirt').should('be.visible')
     })
 
+    it('Remover Produto do Carrinho com Sucesso', () =>{
+        //arrange
+        cy.visit('https://www.saucedemo.com/')
+        cy.get('[data-test="username"]').type('problem_user')
+        cy.get('[data-test="password"]').type('secret_sauce')
+        cy.get('[data-test="login-button"]').click()
+        
+        cy.get('[data-test="add-to-cart-sauce-labs-onesie"]').click()
+            .should('be.visible')
 
+        //act
+        cy.get('[data-test="remove-sauce-labs-onesie"]').click()
+        cy.screenshot('produto removido')
+        
+
+    })    
 })
